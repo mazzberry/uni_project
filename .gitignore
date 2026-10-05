@@ -1,0 +1,7 @@
+venv/
+r2.txt
+rr2.txt
+depy.py
+__pycache__/
+pycache/
+.idea

@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-19 00:45+0330\n"
+"PO-Revision-Date: 2024-10-19 00:45+0330\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: .\cart.py:37
+msgid "Product has been added to the cart"
+msgstr "محصول به سبد شما اضافه شد "
+
+#: .\cart.py:50
+msgid "Product {product.title} has been removed from the cart"
+msgstr "محصول {product.title} از سبد شما حذف شد"
+
+#: .\templates\cart\cart_detail.html:16 .\templates\cart\cart_sidebar.html:9
+msgid "Cart"
+msgstr "سبد"
+
+#: .\templates\cart\cart_detail.html:31
+msgid "Cart is empty! add some products to the cart"
+msgstr "سبد خالیست، محصولات را به سبد خود اضافه کنید"
+
+#: .\templates\cart\cart_detail.html:32
+msgid "Go shopping"
+msgstr "بزن بریم خرید "
+
+#: .\templates\cart\cart_detail.html:74 .\templates\cart\cart_detail.html:100
+#: .\templates\cart\cart_detail.html:136
+msgid "$"
+msgstr "تومان"
+
+#: .\templates\cart\cart_sidebar.html:36
+msgid "Total"
+msgstr "کل"
+
+#: .\templates\cart\cart_sidebar.html:40
+msgid "Go to cart"
+msgstr "به سبد خرید برو"
+
+#: .\templates\cart\cart_sidebar.html:41
+msgid "Checkout"
+msgstr "پرداخت"
