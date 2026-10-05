@@ -15,6 +15,9 @@ from django.contrib import messages
 
 from cart.forms import AddToCartProductForm
 
+PRODUCTS_PER_PAGE = 1
+
+
 def test_translation(request):
     result = _('hello world')
     messages.success(request, "this's success message.")
@@ -25,14 +28,19 @@ def test_translation(request):
 
 class ProductListView(generic.ListView):
     # model = Product #agar too in halat bashe yani : Products.objects.all()
-    queryset = Product.objects.filter(status=True) # migim ke tanha tooye chizayi ke mikaym query bezan va namayesh bede na hamash
+    queryset = Product.objects.filter(status=True).order_by('-datetime_created', '-id') #migim ke tanha tooye chizayi ke mikaym query bezan va namayesh bede na hamash
 
     template_name = 'products/product_list.html'
     context_object_name = 'products'
-    
-    # def get_queryset(self):   migim ke tanha tooye chizayi ke mikaym query bezan va namayesh bede na hamash
-    #     pass
-    
+
+    paginate_by = PRODUCTS_PER_PAGE
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        page_obj = context['page_obj']
+        context['page_numbers'] = page_obj.paginator.get_elided_page_range(page_obj.number)
+        return context
+
 
 class ProductDetailView(generic.DetailView):
     model = Product
