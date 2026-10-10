@@ -1,0 +1,51 @@
+{% load static %}
+{% load i18n %}
+
+<!-- Footer Start-->
+<footer class="footer">
+    <div class="footer-top bg-color ptb--50" data-bg-color="#f6f6f6">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 text-center">
+                    <div class="footer-widget mb--50">
+                        <div class="textwidget">
+                            <img src="{% static 'img/codingyar_logo.png' %}" alt="Logo" style="max-height: 50px;">
+                        </div>
+                    </div>
+                    <div class="footer-widget mb--50 pb--1">
+                        <ul class="footer-menu">
+                            <li><a href="{% url 'about-us' %}">درباره ما</a></li>
+                            <li><a href="{% url 'product_list' %}">فروشگاه</a></li>
+                            <li><a href="contact-us.html">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-widget copyright-text">
+                        ShoppingYar © | همه‌ی حقوق محفوظ است
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer End-->
+
+<!-- Search form Popup Start -->
+<div class="searchform__popup" id="searchForm">
+    <a href="#" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
+    <div class="searchform__body">
+        <p>در باکس زیر عبارت خود را وارد کنید</p>
+        <form class="searchform" action="{% url 'product_list' %}" method="get">
+            <input type="text" name="popup-search" id="popup-search" class="searchform__input"
+                   placeholder="جستجو در بین محصولات...">
+            <button type="submit" class="searchform__submit"><i
+                    class="flaticon flaticon-magnifying-glass-icon"></i></button>
+        </form>
+    </div>
+</div>
+<!-- Search form Popup End -->
+
+{% include 'cart/cart_sidebar.html' %}
+
+<!-- Global Overlay Start -->
+<div class="ShoppingYar-global-overlay"></div>
+<!-- Global Overlay End -->

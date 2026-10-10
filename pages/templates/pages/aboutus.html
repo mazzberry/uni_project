@@ -1,2 +1,451 @@
 {% extends '_base.html' %}
-about-us
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}درباره ما{% endblock %}
+
+{% block extra_head %}
+    <style>
+        .about-hero {
+            background: linear-gradient(rgba(20, 20, 20, .72), rgba(20, 20, 20, .72)),
+            url("{% static 'img/slider/slider-5.jpg' %}") center/cover no-repeat;
+            padding: 95px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .about-hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .about-hero p {
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 2.1;
+            color: #e6e6e6;
+        }
+
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-section--bg {
+            background-color: #f6f6f6;
+        }
+
+        .about-section__head {
+            margin-bottom: 45px;
+        }
+
+        .about-section__head span {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #f2c14e;
+            margin-bottom: 10px;
+        }
+
+        .about-section__head h2 {
+            font-size: 30px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .about-story p {
+            line-height: 2.2;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .about-story p strong {
+            color: #1e1e1e;
+        }
+
+        .about-story__image {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, .12);
+        }
+
+        .about-story__image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Timeline */
+        .about-timeline {
+            position: relative;
+            padding-right: 35px;
+        }
+
+        .about-timeline:before {
+            content: "";
+            position: absolute;
+            right: 9px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .about-timeline__item {
+            position: relative;
+            padding-bottom: 35px;
+        }
+
+        .about-timeline__item:last-child {
+            padding-bottom: 0;
+        }
+
+        .about-timeline__item:before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f2c14e;
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 2px #f2c14e;
+        }
+
+        .about-timeline__item h4 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .about-timeline__item p {
+            color: #777;
+            line-height: 2;
+            margin: 0;
+        }
+
+        /* Why us */
+        .about-card {
+            background: #fff;
+            border-radius: 6px;
+            padding: 35px 25px;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+            transition: .3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .1);
+        }
+
+        .about-card i {
+            font-size: 38px;
+            color: #f2c14e;
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+
+        .about-card h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .about-card p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* Belief */
+        .about-belief {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-belief i {
+            font-size: 40px;
+            color: #f2c14e;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .about-belief p {
+            max-width: 780px;
+            margin: 0 auto;
+            font-size: 19px;
+            line-height: 2.2;
+            color: #e6e6e6;
+        }
+
+        /* Contact */
+        .about-contact__box {
+            background: #fff;
+            border-radius: 6px;
+            padding: 30px 25px;
+            display: flex;
+            align-items: flex-start;
+            height: 100%;
+            border: 1px solid #eee;
+        }
+
+        .about-contact__box i {
+            font-size: 26px;
+            color: #f2c14e;
+            margin-left: 18px;
+            margin-top: 3px;
+        }
+
+        .about-contact__box h5 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .about-contact__box p {
+            margin: 0;
+            color: #777;
+            line-height: 1.9;
+        }
+
+        .about-closing {
+            background: #f2c14e;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .about-closing p {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            color: #4a3b0d;
+        }
+
+        @media (max-width: 767px) {
+            .about-hero h1 {
+                font-size: 28px;
+            }
+
+            .about-section {
+                padding: 55px 0;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+
+        <!-- Hero Start -->
+        <section class="about-hero">
+            <div class="container">
+                <h1>درباره ما</h1>
+                <p>داستان ما؛ از یک غرفه‌ی کوچک تا مقصد اول خرید موبایل</p>
+            </div>
+        </section>
+        <!-- Hero End -->
+
+        <!-- Story Start -->
+        <section class="about-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-sm--40">
+                        <div class="about-story">
+                            <div class="about-section__head">
+                                <span>داستان ما</span>
+                                <h2>همه‌چیز از یک غرفه‌ی ۶ متری شروع شد</h2>
+                            </div>
+                            <p>
+                                چند سال پیش، جوانی عاشق دنیای تکنولوژی که سال‌ها خودش مشتری فروشگاه‌های موبایل
+                                بود، با یک سؤال ساده وارد این بازار شد: <strong>«چرا خرید یک گوشی باید این‌قدر
+                                استرس‌آور باشد؟»</strong> قیمت‌هایی که هر روز عوض می‌شد، کالاهایی که اصالتشان
+                                معلوم نبود و فروشنده‌هایی که فقط می‌خواستند بفروشند، نه راهنمایی کنند.
+                            </p>
+                            <p>
+                                او تصمیم گرفت فروشگاهی بسازد که خودش دوست داشت در آن خرید کند: جایی که
+                                <strong>صداقت</strong> اولین قانونش باشد.
+                            </p>
+                            <p>
+                                در همان روزهای اول، هر مشتری که وارد غرفه می‌شد، قبل از دیدن قیمت‌ها یک سؤال
+                                می‌شنید: «بودجه‌تان چقدر است و بیشتر برای چه کاری گوشی می‌خواهید؟» گاهی حتی
+                                گوشی ارزان‌تری پیشنهاد می‌شد، چون همان نیاز مشتری را بهتر برطرف می‌کرد. همین
+                                رفتار ساده باعث شد مشتری‌ها برگردند، دوستانشان را بیاورند و اعتماد، قدم به قدم
+                                ساخته شود.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-story__image">
+                            <img src="{% static 'img/bg/bg-2.jpg' %}" alt="داستان فروشگاه ما">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Story End -->
+
+        <!-- Growth Start -->
+        <section class="about-section about-section--bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 mb-sm--40">
+                        <div class="about-section__head">
+                            <span>مسیر رشد</span>
+                            <h2>قدم به قدم، کنار شما</h2>
+                        </div>
+                        <div class="about-timeline">
+                            <div class="about-timeline__item">
+                                <h4>سال اول</h4>
+                                <p>با یک غرفه‌ی کوچک و تنها چند برند، فقط با تکیه بر توصیه‌ی دهان‌به‌دهان
+                                    شروع کردیم.</p>
+                            </div>
+                            <div class="about-timeline__item">
+                                <h4>سال سوم</h4>
+                                <p>غرفه به مغازه‌ای بزرگ‌تر تبدیل شد و تنوع کالا از گوشی‌های اقتصادی تا
+                                    پرچم‌دارهای روز دنیا گسترش یافت.</p>
+                            </div>
+                            <div class="about-timeline__item">
+                                <h4>امروز</h4>
+                                <p>فروشگاه ما با هزاران مشتری راضی، خدمات پس از فروش مطمئن و تیمی متخصص، یکی
+                                    از انتخاب‌های مورد اعتماد خریداران موبایل است.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="about-story__image">
+                            <img src="{% static 'img/bg/bg-4.jpg' %}" alt="مسیر رشد فروشگاه">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Growth End -->
+
+        <!-- Why Us Start -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-section__head text-center" style="text-align: center;">
+                    <span>چرا ما؟</span>
+                    <h2>دلایلی که به ما اعتماد می‌کنید</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mb--30">
+                        <div class="about-card">
+                            <i class="flaticon flaticon-present"></i>
+                            <h4>کالای اصل و اورجینال</h4>
+                            <p>تنها کالاهای اصل را با گارانتی معتبر به دست شما می‌رسانیم.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb--30">
+                        <div class="about-card">
+                            <i class="fa fa-tags"></i>
+                            <h4>قیمت منصفانه و شفاف</h4>
+                            <p>بدون هزینه‌ی پنهان؛ هر آنچه می‌پردازید دقیقاً همان چیزی است که می‌بینید.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb--30">
+                        <div class="about-card">
+                            <i class="flaticon flaticon-support"></i>
+                            <h4>مشاوره‌ی رایگان</h4>
+                            <p>برای انتخاب گوشی مناسب نیاز و بودجه‌ی شما در کنارتان هستیم.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb--30">
+                        <div class="about-card">
+                            <i class="flaticon flaticon-repeat"></i>
+                            <h4>پشتیبانی پس از فروش</h4>
+                            <p>حتی بعد از پایان خرید، پاسخگوی سؤال‌ها و مشکلات شما هستیم.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb--30">
+                        <div class="about-card">
+                            <i class="flaticon flaticon-paper-plane"></i>
+                            <h4>ارسال سریع</h4>
+                            <p>سفارش شما در کوتاه‌ترین زمان به سراسر کشور ارسال می‌شود.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb--30">
+                        <div class="about-card">
+                            <i class="fa fa-heart"></i>
+                            <h4>رضایت هزاران مشتری</h4>
+                            <p>اعتمادی که طی سال‌ها با صداقت و کیفیت ساخته‌ایم، سرمایه‌ی ماست.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Why Us End -->
+
+        <!-- Belief Start -->
+        <section class="about-belief">
+            <div class="container">
+                <i class="fa fa-quote-right"></i>
+                <p>
+                    ما معتقدیم یک گوشی فقط یک دستگاه نیست؛ همراه روزمره‌ی شماست، جایی که عکس‌ها، خاطرات و
+                    کارهایتان در آن است. به همین دلیل هر گوشی را طوری به شما تحویل می‌دهیم که انگار برای
+                    عزیزترین دوستمان انتخاب کرده‌ایم.
+                </p>
+            </div>
+        </section>
+        <!-- Belief End -->
+
+        <!-- Contact Start -->
+        <section class="about-section about-section--bg">
+            <div class="container">
+                <div class="about-section__head text-center" style="text-align: center;">
+                    <span>ما را پیدا کنید</span>
+                    <h2>در کنار شما، هر روز هفته</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb--30">
+                        <div class="about-contact__box">
+                            <i class="fa fa-map-marker"></i>
+                            <div>
+                                <h5>آدرس مغازه</h5>
+                                <p>تهران، خیابان ولیعصر، بالاتر از میدان ونک، پلاک ۱۲۴، پاساژ نگین، طبقه‌ی
+                                    همکف، واحد ۱۲</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb--30">
+                        <div class="about-contact__box">
+                            <i class="fa fa-phone"></i>
+                            <div>
+                                <h5>شماره‌ی تماس</h5>
+                                <p>۰۹۱۱۷۴۷۰۲۰۹</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb--30">
+                        <div class="about-contact__box">
+                            <i class="fa fa-clock-o"></i>
+                            <div>
+                                <h5>ساعت کاری</h5>
+                                <p>همه‌ی روزهای هفته از ساعت ۱۰ صبح تا ۹ شب</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact End -->
+
+        <!-- Closing Start -->
+        <section class="about-closing">
+            <div class="container">
+                <p>با افتخار در کنار شما؛ از اولین پیام تا آخرین روز استفاده از گوشی‌تان.</p>
+            </div>
+        </section>
+        <!-- Closing End -->
+
+        {% include '_footer.html' %}
+
+    </div>
+{% endblock content %}
