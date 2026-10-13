@@ -1,0 +1,71 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load persian_translation_tags %}
+
+{% block page_title %}{{ post.title }}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'topheader.html' with header_name=post.title %}
+
+    <div class="main-content-wrapper">
+        <div class="page-content-inner ptb--80">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8 mb-sm--40">
+                        <article class="blog-detail">
+                            <h1 class="blog-detail__title">{{ post.title }}</h1>
+
+                            <div class="blog-detail__meta">
+                                <span><i class="fa fa-user"></i>{{ post.author }}</span>
+                                <span><i class="fa fa-calendar"></i>{{ post.datetime_created|to_jalali:'%Y/%m/%d'|translate_number }}</span>
+                                <span><i class="fa fa-clock-o"></i>{{ post.datetime_created|to_jalali:'%H:%M'|translate_number }}</span>
+                            </div>
+
+                            <div class="blog-detail__body">
+                                <p>{{ post.text }}</p>
+                            </div>
+
+                            {% if user.is_authenticated %}
+                                <div class="blog-detail__actions">
+                                    <a href="{% url 'update-post' post.id %}" class="btn btn-small btn-bg-sand btn-color-dark mr-3">
+                                        <i class="fa fa-edit"></i> ویرایش
+                                    </a>
+                                    <a href="{% url 'delete-post' post.id %}" class="btn btn-small btn-bg-red btn-color-white">
+                                        <i class="fa fa-trash"></i> حذف
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </article>
+
+                        <article class="blog-detail mt--40">
+                            <h3 class="mb--20">دیدگاه‌ها</h3>
+                            <p class="text-muted">هنوز دیدگاهی ثبت نشده است؛ اولین نفری باشید که نظر می‌دهد!</p>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <aside class="blog-widget">
+                            <h5 class="blog-widget__title">درباره وبلاگ</h5>
+                            <p>ما عاشق پایتون و جنگو هستیم؛ اینجا محل به اشتراک‌گذاری تجربه‌ها و ایده‌های ماست.</p>
+                            <a href="{% url 'blog-page' %}" class="btn btn-small btn-bg-dark btn-color-white">بازگشت به وبلاگ</a>
+                        </aside>
+
+                        <aside class="blog-widget">
+                            <h5 class="blog-widget__title">دسترسی سریع</h5>
+                            <p>به فروشگاه سر بزنید و از جدیدترین محصولات با خبر شوید.</p>
+                            <a href="{% url 'product_list' %}" class="btn btn-small btn-bg-sand btn-color-dark">مشاهده فروشگاه</a>
+                        </aside>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

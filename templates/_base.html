@@ -71,8 +71,8 @@
                                         <span class="mm-text">درباره ما</span>
                                     </a>
                                 </li>
-                                <li class="mainmenu__item menu-item-has-children">
-                                    <a href="Blog.html" class="mainmenu__link">
+                                <li class="mainmenu__item {% if request.resolver_match.url_name == 'blog-page' %}active{% endif %}">
+                                    <a href="{% url 'blog-page' %}" class="mainmenu__link">
                                         <span class="mm-text">وبلاگ</span>
                                     </a>
                                 </li>

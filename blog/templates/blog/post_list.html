@@ -1,0 +1,137 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load persian_translation_tags %}
+
+{% block page_title %}{% translate 'Blog' %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+
+        <!-- Blog Hero Start -->
+        <section class="blog-hero">
+            <div class="container">
+                <h1>وبلاگ</h1>
+                <p>مقالات، آموزش‌ها و اخبار دنیای موبایل را اینجا دنبال کنید.</p>
+            </div>
+        </section>
+        <!-- Blog Hero End -->
+
+        <!-- Blog Content Start -->
+        <section class="blog-section">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Posts Column -->
+                    <div class="col-lg-8 mb-sm--40">
+                        {% if not user.is_authenticated %}
+                            <div class="blog-auth-required">
+                                {% translate 'برای نوشتن یک پست جدید ابتدا' %}
+                                <a href="{% url 'account_login' %}">{% translate 'وارد شوید' %}</a>.
+                            </div>
+                        {% endif %}
+
+                        {% if posts %}
+                            <div class="row">
+                                {% for post in posts %}
+                                    <div class="col-md-6 mb--40">
+                                        <article class="blog-card">
+                                            <div class="blog-card__body">
+                                                <div class="blog-card__meta">
+                                                    <span><i class="fa fa-user"></i>{{ post.author }}</span>
+                                                    <span><i class="fa fa-calendar"></i>{{ post.datetime_created|to_jalali:'%Y/%m/%d'|translate_number }}</span>
+                                                </div>
+                                                <h3 class="blog-card__title">
+                                                    <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+                                                </h3>
+                                                <p class="blog-card__text">{{ post.text }}</p>
+                                            </div>
+                                            <div class="blog-card__footer">
+                                                <a href="{% url 'post-detail' post.id %}"
+                                                   class="btn btn-small btn-bg-red btn-color-white">ادامه مطلب</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="blog-empty">
+                                <i class="fa fa-newspaper-o"></i>
+                                <h4>هنوز پستی منتشر نشده است</h4>
+                                <p>اولین پست وبلاگ را شما بنویسید!</p>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'new-post' %}" class="btn btn-bg-red btn-color-white">نوشتن اولین پست</a>
+                                {% else %}
+                                    <a href="{% url 'account_login' %}" class="btn btn-bg-red btn-color-white">ورود و نوشتن پست</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {% if page_obj.has_other_pages %}
+                            <nav class="pagination-wrap mt--35 pt-3" aria-label="pagination">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li><a href="?page={{ page_obj.previous_page_number }}"
+                                               class="prev page-number"><i class="fa fa-angle-double-right"></i></a></li>
+                                    {% endif %}
+
+                                    {% for page_number in page_obj.paginator.get_elided_page_range %}
+                                        {% if page_number == page_obj.paginator.ELLIPSIS %}
+                                            <li><span class="page-number">…</span></li>
+                                        {% elif page_number == page_obj.number %}
+                                            <li><span class="current page-number"
+                                                      aria-current="page">{{ page_number|translate_number }}</span></li>
+                                        {% else %}
+                                            <li><a href="?page={{ page_number }}"
+                                                   class="page-number">{{ page_number|translate_number }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                        <li><a href="?page={{ page_obj.next_page_number }}" class="next page-number"><i
+                                                class="fa fa-angle-double-left"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+                    </div>
+                    <!-- Posts Column End -->
+
+                    <!-- Sidebar Column -->
+                    <div class="col-lg-4">
+                        <aside class="blog-widget">
+                            <h5 class="blog-widget__title">درباره وبلاگ</h5>
+                            <p>ما عاشق پایتون و جنگو هستیم؛ اینجا محل به اشتراک‌گذاری تجربه‌ها و ایده‌های ماست.</p>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'new-post' %}" class="btn btn-small btn-bg-dark btn-color-white">
+                                    <i class="fa fa-plus"></i> پست جدید
+                                </a>
+                            {% else %}
+                                <a href="{% url 'account_login' %}" class="btn btn-small btn-bg-dark btn-color-white">
+                                    ورود برای نوشتن پست
+                                </a>
+                            {% endif %}
+                        </aside>
+
+                        <aside class="blog-widget">
+                            <h5 class="blog-widget__title">دسترسی سریع</h5>
+                            <p>به فروشگاه سر بزنید و از جدیدترین محصولات با خبر شوید.</p>
+                            <a href="{% url 'product_list' %}" class="btn btn-small btn-bg-sand btn-color-dark">مشاهده فروشگاه</a>
+                        </aside>
+                    </div>
+                    <!-- Sidebar Column End -->
+
+                </div>
+            </div>
+        </section>
+        <!-- Blog Content End -->
+
+        {% include '_footer.html' %}
+
+    </div>
+{% endblock content %}

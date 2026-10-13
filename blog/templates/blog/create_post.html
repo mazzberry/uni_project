@@ -1,0 +1,46 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}{% if post %}{% translate 'Edit Post' %}{% else %}{% translate 'New Post' %}{% endif %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main-content-wrapper">
+        <div class="page-content-inner ptb--80">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+
+                        <article class="blog-detail">
+                            {% if post %}
+                                <h1 class="blog-detail__title mb--20">ویرایش پست</h1>
+                                <p class="blog-card__meta mb--30">
+                                    <span><i class="fa fa-pencil"></i> {{ post.title }}</span>
+                                </p>
+                            {% else %}
+                                <h1 class="blog-detail__title mb--20">پست جدید</h1>
+                            {% endif %}
+
+                            <form method="POST" novalidate>
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="blog-detail__actions">
+                                    <button type="submit" class="btn btn-bg-red btn-color-white">
+                                        {% if post %}<i class="fa fa-save"></i> ذخیره تغییرات{% else %}<i class="fa fa-paper-plane"></i> انتشار پست{% endif %}
+                                    </button>
+                                    <a href="{% url 'blog-page' %}" class="btn btn-bg-sand btn-color-dark">انصراف</a>
+                                </div>
+                            </form>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     # 'products.apps.ProductsConfig', intor ham mishe nevesht esm app ro to install
     'products',
-    'persian_translate.apps.PersianTranslateConfig'
+    'persian_translate.apps.PersianTranslateConfig',
+    'blog',
 
 ]
 
@@ -223,6 +224,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # UserModel config
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 

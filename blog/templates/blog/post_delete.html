@@ -1,0 +1,33 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}{% translate 'Delete Post' %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main-content-wrapper">
+        <div class="page-content-inner ptb--80">
+            <div class="container">
+                <div class="blog-delete">
+                    <i class="fa fa-trash"></i>
+                    <h4>آیا از حذف این پست مطمئن هستید؟</h4>
+                    <p>
+                        پست «<span class="blog-delete__title">{{ post.title }}</span>» به‌صورت
+                        کامل حذف خواهد شد و قابل بازگشت نخواهد بود.
+                    </p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-bg-red btn-color-white mr-3">
+                            <i class="fa fa-trash"></i> بله، حذف کن
+                        </button>
+                        <a href="{% url 'post-detail' post.id %}" class="btn btn-bg-sand btn-color-dark">انصراف</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
